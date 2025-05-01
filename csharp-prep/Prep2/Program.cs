@@ -1,4 +1,5 @@
 using System;
+using System.Data;
 
 class Program
 {
@@ -12,6 +13,24 @@ class Program
 
         string letter;
         string suffix;
+
+        letter = getLetter(grade_percent);
+        suffix = getSuffix(grade_percent);
+        
+        Console.Write($"Your Letter Grade is [{letter}{suffix}]");
+
+        if (grade_percent >= 70)
+        {
+            Console.WriteLine("!\nGreat Job! You passed the class.");
+        }
+        else
+        {
+            Console.WriteLine("...\nYou didn't pass. What happened?");
+        }
+    }
+    static string getLetter(int grade_percent)
+    {
+        string letter;
 
         if (grade_percent >= 90)
         {
@@ -34,7 +53,12 @@ class Program
             letter = "F";
         }
 
+        return letter;
+    }
+    static string getSuffix(int grade_percent)
+    {
         int last_digit = grade_percent % 10;
+        string suffix;
 
         if ((last_digit >= 7) && (grade_percent < 90) && (grade_percent >= 60))
         {
@@ -49,15 +73,6 @@ class Program
             suffix = "";
         }
 
-        Console.Write($"Your Letter Grade is [{letter}{suffix}]");
-
-        if (grade_percent >= 70)
-        {
-            Console.WriteLine("!\nGreat Job! You passed the class.");
-        }
-        else
-        {
-            Console.WriteLine("...\nYou didn't pass. What happened?");
-        }
+        return suffix;
     }
 }
