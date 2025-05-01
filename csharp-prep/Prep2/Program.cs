@@ -28,8 +28,8 @@ class Program
             Console.WriteLine("...\nYou didn't pass. What happened?");
         }
     }
-    static string getLetter(int grade_percent)
-    {
+
+    static string getLetter(int grade_percent) {
         string letter;
 
         if (grade_percent >= 90)
@@ -55,8 +55,8 @@ class Program
 
         return letter;
     }
-    static string getSuffix(int grade_percent)
-    {
+    
+    static string getSuffix(int grade_percent) {
         int last_digit = grade_percent % 10;
         string suffix;
 
