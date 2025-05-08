@@ -24,7 +24,7 @@ class Program
         return number;
     }
     static int squareNumber(int number) {
-        return number*number;
+        return number * number;
     }
     static void displayResult(string name, int number) {
         Console.WriteLine($"\nHello, {name}!");
