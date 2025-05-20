@@ -29,6 +29,15 @@ class Fraction
     {
         _denominator = denominator;
     }
+
+    public int GetNumerator()
+    {
+        return _numerator;
+    }
+    public int GetDenominator()
+    {
+        return _denominator;
+    }
     public string GetFractionString()
     {
         return $"{_numerator}/{_denominator}";
