@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Runtime.InteropServices;
-
 
 // The creative addition that I included in this project
 // is the Journal Class tracking whether it is saved or not,
@@ -32,6 +29,7 @@ class Program
     static Menu _saveOrNotMenu = new Menu();
     static Journal _currentJournal = new Journal();
     static Prompt _prompts = new Prompt();
+    static DateTime _currentDate = DateTime.Now;
 
     static void Main(string[] args)
     {
@@ -51,10 +49,10 @@ class Program
             {
                 case 1:
                     userResponse = _prompts.GetResponse();
-                    _currentJournal.InsertEntry(userResponse[0], userResponse[1]);
+                    _currentJournal.InsertEntry(_currentDate.ToShortDateString(), userResponse[0], userResponse[1]);
                     break;
                 case 2:
-                    if (!_currentJournal._saved)
+                    if (!_currentJournal._saved) // Check for unsaved changes. Exceeds Requirements
                     {
                         Console.WriteLine("!! You have unsaved Changes !!");
                         int toSave = _saveOrNotMenu.GetInput();
@@ -73,7 +71,7 @@ class Program
                     _currentJournal.Print();
                     break;
                 case 5:
-                    if (!_currentJournal._saved)
+                    if (!_currentJournal._saved) // Check for unsaved changes. Exceeds Requirements
                     {
                         Console.WriteLine("!! You have unsaved Changes !!");
                         int toSave = _saveOrNotMenu.GetInput();
