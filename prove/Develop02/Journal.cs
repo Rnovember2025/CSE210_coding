@@ -25,7 +25,7 @@ class Journal {
     public void Load() {
         _journalEntries.Clear();
 
-        _filePath = "/home/wizard/Documents/Journal/"+_whichFile.GetResponse()[1]; 
+        _filePath = Environment.CurrentDirectory + "/" + _whichFile.GetResponse()[1];
         string[] lines = System.IO.File.ReadAllLines(_filePath);
         
         int number_of_lines = lines.Count();
@@ -62,7 +62,7 @@ class Journal {
         bool append_to_file = false;
         if (_filePath == "") {
             append_to_file = true;
-            _filePath = "/home/wizard/Documents/Journal/"+_whichFile.GetResponse()[1];
+            _filePath = Environment.CurrentDirectory + "/" + _whichFile.GetResponse()[1];
         }
 
         if (!File.Exists(_filePath)) {

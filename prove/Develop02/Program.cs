@@ -39,7 +39,7 @@ class Program
         int userInput;
         List<string> userResponse;
 
-        Console.WriteLine("Welcome to the RIC Journal Editor\n\n");
+        Console.WriteLine("Welcome to the Journal Editor\n\n");
 
         while (running)
         {
