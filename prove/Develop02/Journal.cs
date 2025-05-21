@@ -6,9 +6,11 @@ class Journal {
     public Prompt _whichFile = new Prompt();
     public string _filePath = ""; // Saves file path. Exceeds Requirements
     public bool _saved = true; // Tracks saved status. Exceeds Requirements.
-    
-    public Journal() {
-        _whichFile._allPrompts = new List<string>{"Enter the File Path:"};
+
+    public Journal()
+    {
+        _whichFile._allPrompts = new List<string> { "Enter the File Path:" };
+        _whichFile._waitForDoneEntry = false;
     }
 
     public void InsertEntry(string dateString, string promptString, string response) {
