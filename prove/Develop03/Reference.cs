@@ -1,6 +1,6 @@
 using System;
 
-class Reference
+public class Reference
 {
     private string _book;
     private int _chapter;
@@ -16,7 +16,7 @@ class Reference
         _startVerse = int.Parse(parts[2]);
         _endVerse = int.Parse(parts.Last());
     }
-    public string getReference()
+    public string GetReference()
     {
         if (_startVerse == _endVerse)
         {

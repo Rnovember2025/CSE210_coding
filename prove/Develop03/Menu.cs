@@ -1,31 +1,31 @@
 using System;
 
-class Menu
+public class Menu
 {
     private List<string> _validInputs = new List<string> { "u", "r", "q", "\n" };
 
-    public int promptUser()
+    public int PromptUser()
     {
         Console.WriteLine("\nMenu Options:\n\tq -> Quit\n\tu -> Undo\n\tr -> Redo\n\tReturn -> Erase more words.\n");
         Console.Write("Please enter your choice >>> ");
         while (true)
         {
-            string userResponse = Console.ReadLine();
+            System.ConsoleKey userResponse = Console.ReadKey().Key;
             switch (userResponse)
             {
-                case "q":
+                case ConsoleKey.Q:
                     return 0;
-                case "u":
+                case ConsoleKey.U:
                     return 1;
-                case "r":
+                case ConsoleKey.R:
                     return 2;
-                case "":
+                case ConsoleKey.Enter:
                     return 3;
                 default:
                     Console.Write("Invalid Entry. Try Again >>> ");
                     break;
             }
         }
-        
+
     }
 }
