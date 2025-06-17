@@ -19,9 +19,9 @@ public class Breathing : Activity
         while (_elapsedTime < _duration)
         {
             Console.WriteLine("\nBreath in...");
-            this.ShowProgress(4);
+            ShowProgress(4);
             Console.WriteLine("Breath out...");
-            this.ShowProgress(6);
+            ShowProgress(6);
             _elapsedTime += 10;
         }
     }

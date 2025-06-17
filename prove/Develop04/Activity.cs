@@ -13,10 +13,6 @@ public class Activity
         _intro = intro;
         _progress = new ProgressBar("Pausing", 10);
     }
-    public string GetTitle()
-    {
-        return $"{_title} Activity";
-    }
     public void Intro()
     {
         Console.Clear();
