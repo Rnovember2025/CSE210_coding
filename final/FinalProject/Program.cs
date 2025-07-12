@@ -1,16 +1,16 @@
 /*
 Forms an equation with a tree structer that looks like this:
 
-                            =
+root ->                     =
                            / \
-                          /   +<r>
+add3 ->                   /   +<r>
                          /   / \
                         /   x   2
                        /
-            ----------*------------------
+mult1 ->    ----------*------------------
            /    \      \   \          \  \
-          /      +<r>   x   pi<n><r>   2  3
-         +      / \
+add2 ->   /      +<r>   x   pi<n><r>   2  3
+add1 ->  +      / \
         / \    x   3
        x   1<n>
 
@@ -25,30 +25,30 @@ class Program
     {
         EquationElement root = new EqualSignOpperator();        //Create equal sign that is the root of the tree
 
-        EquationElement piece1 = new AdditionOpperator();       //Create an addition between 'x' and '-1'
-        piece1.AddChild(new Atom("x"));
-        piece1.AddChild(new Atom(1, true, false));              //Syntax for Atom<> is Atom(value, isNegative, isReciprocal)
+        EquationElement add1 = new AdditionOpperator();         //Create an addition between 'x' and '-1'
+        add1.AddChild(new Atom("x"));
+        add1.AddChild(new Atom(1, true, false));                //Syntax for Atom<> is Atom(value, isNegative, isReciprocal)
 
-        EquationElement piece2 = new AdditionOpperator();       //Create an addition between 'x' and '3'
-        piece2.AddChild(new Atom("x"));
-        piece2.AddChild(new Atom(3));
-        piece2.Reciprocate();                                   //Changes to reciprocal, '1/(x+3)' instead of 'x+3'
+        EquationElement add2 = new AdditionOpperator();         //Create an addition between 'x' and '3'
+        add2.AddChild(new Atom("x"));
+        add2.AddChild(new Atom(3));
+        add2.Reciprocate();                                     //Changes to reciprocal, '1/(x+3)' instead of 'x+3'
 
-        EquationElement piece3 = new MultiplicationOpperator(); //Create multiplication between piece1, piece2, 'x', '-1/pi', '2', and '3'
-        piece3.AddChild(piece1);
-        piece3.AddChild(piece2);
-        piece3.AddChild(new Atom("x"));
-        piece3.AddChild(new Atom("pi", true, true));
-        piece3.AddChild(new Atom(2));
-        piece3.AddChild(new Atom(3));
+        EquationElement mult1 = new MultiplicationOpperator();  //Create multiplication between piece1, piece2, 'x', '-1/pi', '2', and '3'
+        mult1.AddChild(add1);
+        mult1.AddChild(add2);
+        mult1.AddChild(new Atom("x"));
+        mult1.AddChild(new Atom("pi", true, true));
+        mult1.AddChild(new Atom(2));
+        mult1.AddChild(new Atom(3));
 
-        EquationElement piece4 = new AdditionOpperator();       //Creaete addition between 'x', and '2'
-        piece4.AddChild(new Atom("x"));
-        piece4.AddChild(new Atom(2));
-        piece4.Reciprocate();
+        EquationElement add3 = new AdditionOpperator();         //Creaete addition between 'x', and '2'
+        add3.AddChild(new Atom("x"));
+        add3.AddChild(new Atom(2));
+        add3.Reciprocate();
 
-        root.AddChild(piece3);                                  //Fill in both sides of equation to form final tree
-        root.AddChild(piece4);
+        root.AddChild(mult1);                                   //Fill in both sides of equation to form final tree
+        root.AddChild(add3);
 
         Console.WriteLine(root.GetDisplayFormat());             //Display to user
     }
