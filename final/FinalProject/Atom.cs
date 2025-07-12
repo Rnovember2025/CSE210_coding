@@ -33,44 +33,19 @@ public class Atom : EquationElement
         _isNegative = false;
         _isInverse = false;
     }
-    public string GetSymbol()
-    {
-        switch (_type)
-        {
-            case 0:
-                return _symbol;
-            case 1:
-                return _value.ToString();
-            default:
-                return "";
-        }
-    }
     public List<int> GetFactors()
     {
         return new List<int>();
     }
     public override string GetDisplayFormat()
     {
-        switch (_type)
-        {
-            case 0:
-                return _symbol;
-            case 1:
-                return _value.ToString();
-            default:
-                return "";
-        }
+        if (_type == 0) { return _symbol; }
+        else { return _value.ToString(); }
     }
     public override string GetElementType()
     {
-        if (_type == 0)
-        {
-            return "SYMBOL";
-        }
-        else
-        {
-            return "INT";
-        }
+        if (_type == 0) { return "SYMBOL"; }
+        else{ return "INT"; }
     }
     public override void Negate()
     {

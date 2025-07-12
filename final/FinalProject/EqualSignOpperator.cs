@@ -5,24 +5,23 @@ public class EqualSignOpperator : Opperator
     {
         string formattedString = "";
 
-        switch (_children.Count())
+        int totalChildren = _children.Count();
+
+        if (totalChildren == 0) {
+            formattedString = "0=0";
+        }
+        else {
+            formattedString += _children[0].IsNegative() ? "-" : "";
+            formattedString += _children[0].IsReciprocal() ? "1/" : "";
+            formattedString += _children[0].GetDisplayFormat() + "=";
+        }
+        
+        if (totalChildren == 1) { formattedString += "0"; }
+        else
         {
-            case 0:
-                formattedString = "0=0";
-                break;
-            case 1:
-                formattedString += _children[0].IsNegative() ? "-" : "";
-                formattedString += _children[0].IsReciprocal() ? "1/" : "";
-                formattedString += _children[0].GetDisplayFormat() + "=0";
-                break;
-            case 2:
-                formattedString += _children[0].IsNegative() ? "-" : "";
-                formattedString += _children[0].IsReciprocal() ? "1/" : "";
-                formattedString += _children[0].GetDisplayFormat() + "=";
-                formattedString += _children[1].IsNegative() ? "-" : "";
-                formattedString += _children[1].IsReciprocal() ? "1/" : "";
-                formattedString += _children[1].GetDisplayFormat();
-                break;
+            formattedString += _children[1].IsNegative() ? "-" : "";
+            formattedString += _children[1].IsReciprocal() ? "1/" : "";
+            formattedString += _children[1].GetDisplayFormat();
         }
         return formattedString;
     }

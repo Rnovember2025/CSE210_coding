@@ -12,6 +12,7 @@ public class MultiplicationOpperator : Opperator
         {
             switch (element.GetElementType())
             {
+                case "ADD":
                 case "SYMBOL":
                     if (element.IsReciprocal())
                     {
@@ -31,18 +32,6 @@ public class MultiplicationOpperator : Opperator
                     {
                         numeratorCoefficient *= Convert.ToInt32(element.GetDisplayFormat());
                     }
-                    break;
-                case "ADD":
-                    if (element.IsReciprocal())
-                    {
-                        denominatorString += $"{element.GetDisplayFormat()}";
-                    }
-                    else
-                    {
-                        numeratorString += $"{element.GetDisplayFormat()}";
-                    }
-                    break;
-                default:
                     break;
             }
         }

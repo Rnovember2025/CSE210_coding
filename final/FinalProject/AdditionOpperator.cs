@@ -19,8 +19,6 @@ public class AdditionOpperator : Opperator
                     formattedString += element.IsNegative() ? "-" : "+";
                     formattedString += element.GetDisplayFormat();
                     break;
-                default:
-                    break;
             }
         }
         formattedString = formattedString[0] == '+' ? formattedString.Substring(1, formattedString.Count() - 1) : formattedString;

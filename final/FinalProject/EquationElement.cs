@@ -1,7 +1,6 @@
 public abstract class EquationElement
 {
     private EquationElement _parent = null;
-    public EquationElement() { }
     public void SetParent(EquationElement parent)
     {
         _parent = parent;
