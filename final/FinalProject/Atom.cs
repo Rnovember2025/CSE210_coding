@@ -1,5 +1,3 @@
-using System.Data;
-
 public class Atom : EquationElement
 {
     private string _symbol;

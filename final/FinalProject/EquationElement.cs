@@ -1,5 +1,3 @@
-using System.IO.Compression;
-
 public abstract class EquationElement
 {
     private EquationElement _parent = null;

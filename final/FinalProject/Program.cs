@@ -1,5 +1,5 @@
 /*
-Forms an equation with a tree structer that looks like this:
+Forms an equation with a tree structure that looks like this:
 
 root ->                     =
                            / \
@@ -14,7 +14,7 @@ add1 ->  +      / \
         / \    x   3
        x   1<n>
 
-where <n> is a negative attribute and <r> is a reciprocal attribute,
+Where <n> is a negative attribute and <r> is a reciprocal attribute,
 
 Then display it in a user friendly fashion.
 */
