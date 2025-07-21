@@ -1,51 +1,23 @@
-public class Atom : EquationElement
+public abstract class Atom : EquationElement
 {
-    private string _symbol;
-    private int _value;
-    private int _type; //0 for ascii symbol, 1 for integer.
-    private bool _isInverse;
+    private bool _isReciprocal;
     private bool _isNegative;
-    public Atom(string letter,  bool isNegative, bool isInverse) : base()
+    private string _atomType;
+    public Atom(string atomType, bool isNegative, bool isReciprocal) : base()
     {
-        _symbol = letter;
-        _type = 0;
+        _atomType = atomType;
         _isNegative = isNegative;
-        _isInverse = isInverse;
+        _isReciprocal = isReciprocal;
     }
-    public Atom(string letter) : base()
+    public Atom(string atomType) : base()
     {
-        _symbol = letter;
-        _type = 0;
-        _isInverse = false;
+        _atomType = atomType;
         _isNegative = false;
+        _isReciprocal = false;
     }
-    public Atom(int value, bool isNegative, bool isInverse) : base()
+    public override string GetElementType()  //This is used for identifying types when searching through the tree. Also used in switch statements for getting the display format
     {
-        _value = value;
-        _type = 1;
-        _isNegative = isNegative;
-        _isInverse = isInverse;
-    }
-    public Atom(int value) : base()
-    {
-        _value = value;
-        _type = 1;
-        _isNegative = false;
-        _isInverse = false;
-    }
-    public List<int> GetFactors()
-    {
-        return new List<int>();
-    }
-    public override string GetDisplayFormat()
-    {
-        if (_type == 0) { return _symbol; }
-        else { return _value.ToString(); }
-    }
-    public override string GetElementType()
-    {
-        if (_type == 0) { return "SYMBOL"; }
-        else{ return "INT"; }
+        return _atomType;
     }
     public override void Negate()
     {
@@ -55,16 +27,23 @@ public class Atom : EquationElement
     {
         return _isNegative;
     }
-    public override void Reciprocate()
+    public override void Reciprocate()  //overwritten by <Number> class
     {
-        _isInverse = !_isInverse;
+        _isReciprocal = !_isReciprocal;
     }
-    public override bool IsReciprocal()
+    public override bool IsReciprocal()  //overwritten by <Number> class
     {
-        return _isInverse;
+        return _isReciprocal;
     }
-    public override List<int> GetHitBox()
+    public override bool IsEqualTo(EquationElement element)  //if both are same type, have the same stuff, show the same attitude, and do the same gymastics, their friends.
     {
-        return new List<int>();
+        if (element.GetElementType() == _atomType &&
+            element.GetDisplayFormat() == this.GetDisplayFormat() &&
+            element.IsNegative() == _isNegative &&
+            element.IsReciprocal() == _isReciprocal)
+        {
+            return true;
+        }
+        return false;
     }
 }
