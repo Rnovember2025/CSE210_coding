@@ -25,7 +25,7 @@ public class Program
         //Test();
 
         Console.WriteLine("=============================\nWelcome to Ronan Nashematica!\n=============================");
-        PrintHelp();
+        Console.WriteLine("Type 'help' to get help :)\n");
 
         string[] userInput;
         bool running = true;
