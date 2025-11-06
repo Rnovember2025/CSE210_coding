@@ -1,11 +1,12 @@
 using System;
+using System.Runtime.CompilerServices;
 
 public class Scripture
 {
     private List<Word> _words = new List<Word>();
     private Reference _reference;
-    private int _currentDepth = 0;
-    private int _maxDepthReached = 0;
+    private UndoStack _undoStack = new UndoStack();
+    private Stack<List<Word>> _redoStack = new Stack<List<Word>>();
     private Random _rand = new Random();
     public Scripture(string reference, string text)
     {
@@ -28,25 +29,20 @@ public class Scripture
     }
     public void HideWords()
     {
-        if (_currentDepth >= _maxDepthReached)
+        List<Word> shownWords = GetShownWords();
+        int totalWordsToHide = (3 <= shownWords.Count) ? 3 : shownWords.Count;
+        List<Word> wordsToHide = new List<Word>();
+
+        for (int i = 0; i < totalWordsToHide; i++)
         {
-            _maxDepthReached++;
-            _currentDepth++;
-            int successes = 0;
-            while ((successes < 3) & (!WordsAllHidden()))
-            {
-                int index = _rand.Next(0, _words.Count());
-                if (_words[index].IsShown())
-                {
-                    _words[index].Hide(_maxDepthReached);
-                    successes++;
-                }
-            }
+            int r = _rand.Next(shownWords.Count);
+            Console.WriteLine(r);
+            wordsToHide.Add(shownWords[r]);
+            shownWords.RemoveAt(r);
         }
-        else
-        {
-            Redo();
-        }
+
+        _undoStack.Do(wordsToHide);
+
     }
     public bool WordsAllHidden()
     {
@@ -60,36 +56,45 @@ public class Scripture
         return true;
     }
 
+    public List<Word> GetShownWords()
+    {
+        List<Word> shownWords = new List<Word>();
+
+        foreach (Word w in _words)
+        {
+            if (w.IsShown())
+            {
+                shownWords.Add(w);
+            }
+        }
+        return shownWords;
+    }
+
     public double GetProgress()
     {
-        double percentage = 0;
-        if (_currentDepth != 0)
-        {
-            percentage = _currentDepth / ((float)_words.Count() / 3);
-            if (percentage > 100) { percentage = 100; }
-        }
+        double percentage;
+        List<Word> shownWords = new List<Word>();
+
+        percentage = (_words.Count - shownWords.Count) / (float)_words.Count;
         return percentage;
     }
     public void Undo()
     {
-        if (_currentDepth > 0)
+        List<Word> words = _undoStack.Undo();
+        if (words.Count() != 0)
         {
-            foreach (Word w in _words)
-            {
-                w.UnHide(_currentDepth);
-            }
-            _currentDepth--;
+            _redoStack.Push(words);
         }
     }
     public void Redo()
     {
-        if (_currentDepth < _maxDepthReached)
+        try
         {
-            _currentDepth++;
-            foreach (Word w in _words)
-            {
-                w.ReHide(_currentDepth);
-            }
+            List<Word> words = _redoStack.Pop();
+            _undoStack.Do(words);
+        }
+        catch
+        {
         }
     }
 }
